@@ -32,10 +32,9 @@ class NiftiDataset(Dataset):
         return len(self.images_dir)
 
     def __getitem__(self, idx:int):
+        print("hey")
         imgs, labs = self.images[idx], self.labels[idx]
         sample = (nib.load(imgs).get_fdata(dtype=np.float32), nib.load(labs).get_fdata(dtype=np.float32))
         if self.transform is not None:
             sample = self.transform(sample)
         return sample
-
-print("hey")
