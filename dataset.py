@@ -37,3 +37,5 @@ class NiftiDataset(Dataset):
         if self.transform is not None:
             sample = self.transform(sample)
         return sample
+
+print("hey")
