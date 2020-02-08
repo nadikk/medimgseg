@@ -1,7 +1,6 @@
 from torch.utils.data.dataset import Dataset
 from typing import Optional, Callable
 from glob import glob
-from transforms import ToTensor, AddChannel, Pad3d
 import nibabel as nib
 import numpy as np
 import os
@@ -38,16 +37,3 @@ class NiftiDataset(Dataset):
         if self.transform is not None:
             sample = self.transform(sample)
         return sample
-
-images_dir = "/home/nadia/Documents/bachelor/medicaldecathlon/data/Task02_Heart/imagesTr/"
-labels_dir = "/home/nadia/Documents/bachelor/medicaldecathlon/data/Task02_Heart/labelsTr/"
-
-import torchvision.transforms as transforms
-transform = transforms.Compose([ToTensor(), AddChannel(), Pad3d(max_sizes=(320,320,130))])
-
-dataset = NiftiDataset(images_dir, labels_dir, transform)
-print(len(dataset), dataset[0][0].shape)
-
-import matplotlib.pyplot as plt
-plt.imshow(dataset[0][0][0,:,10,:])
-plt.show()
