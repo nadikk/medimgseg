@@ -1,6 +1,7 @@
 from torch.utils.data.dataset import Dataset
 from typing import Optional, Callable
 from glob import glob
+from transforms import ToTensor, AddChannel, Pad3d
 import nibabel as nib
 import numpy as np
 import os
@@ -29,7 +30,7 @@ class NiftiDataset(Dataset):
             raise ValueError("Number of images and labels must be equal and non-zero")
 
     def __len__(self):
-        return len(self.images_dir)
+        return len(self.images)
 
     def __getitem__(self, idx:int):
         imgs, labs = self.images[idx], self.labels[idx]
